@@ -1,0 +1,65 @@
+  steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        version: '6.0.x' # Use the version that matches your project
+
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore NuGet packages'
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build the application'
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Run unit tests'
+      inputs:
+        command: 'test'
+        projects: '**/*Tests.csproj'
+        arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage"'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish the application'
+      inputs:
+        command: 'publish'
+        projects: '**/*.csproj'
+        publishWebProjects: true
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish'
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish artifacts'
+      inputs:
+        artifactName: 'publish'
+        targetPath: '$(Build.ArtifactStagingDirectory)/publish'
+        
+        
+    - task: AzureCLI@2
+      displayName: 'Azure CLI - AKS Deployment'
+      inputs:
+        azureSubscription: 'Your Azure Subscription' # Choose or create a service connection to your Azure subscription
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+        az aks get-credentials --resource-group aks_terraform001 --name aksterraform001 --overwrite-existing
+        kubectl apply -f $(Build.ArtifactStagingDirectory)/publish/deployment.yaml    
+        
+    - task: SonarCloudPrepare@1
+      displayName: 'Prepare analysis on SonarCloud'
+      inputs:
+        SonarCloud: 'Your_SonarCloud_Service_Connection'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Run SonarScanner'
+      inputs:
+        command: 'custom'
+        custom: 'sonar-scanner'
+
+    - task: SonarCloudPublish@1
+      displayName: 'Publish analysis results to SonarCloud'
