@@ -63,3 +63,4 @@
 
     - task: SonarCloudPublish@1
       displayName: 'Publish analysis results to SonarCloud'
+      
