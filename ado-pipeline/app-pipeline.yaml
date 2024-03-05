@@ -22,31 +22,5 @@ stages:
     steps:
     - template: pipeline-templates/dotnet-ci.yaml
 
-- stage: DevCD
-  dependsOn: CI
-  pool:
-    vmImage: 'windows-latest'
-  variables:
-  - group: env-dev
-  jobs:
-  - job: Deploy  
-    steps:
-    - template: pipeline-templates/dotnet-deployment.yaml
 
-- stage: ProdCD
-  dependsOn: DevCD
-  pool:
-    vmImage: 'windows-latest'
-  variables:
-  - group: env-prod
-  jobs:
-  - deployment:
-    displayName: Deploy
-    environment: Prod-Approvers
-    timeoutInMinutes: 180
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: pipeline-templates/dotnet-deployment.yaml
           
