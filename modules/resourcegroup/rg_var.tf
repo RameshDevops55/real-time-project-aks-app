@@ -1,18 +1,18 @@
-variable "rg_name" {
+variable "rg_name" {   #resource we are using
   description = "The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created."
-  type = string
-  default = "aks_terraform001"
+  type = string  #key-value pair
+  default = "aks_terraform001"   #Custom name of rg
 }
 
-variable "location" {
+variable "location" {   #to define location of the rg
     description =  "(Required) The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created."
-    type = string
-    default = "uksouth"  
+    type = string   #key-value pair
+    default = "uksouth"   #Custom Location  of rg
 }
 
 variable "tags" {
     description =  "(Optional) A mapping of tags which should be assigned to the Resource Group."
-    type = map(string)
-    default = {      
+    type = map(string) #data type of the variable
+    default = {      #value for the variable
     }
 }
