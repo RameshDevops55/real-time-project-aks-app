@@ -24,6 +24,8 @@
         command: 'test'
         projects: '**/*Tests.csproj'
         arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage"'
+        
+
 
     - task: DotNetCoreCLI@2
       displayName: 'Publish the application'
@@ -39,16 +41,16 @@
         artifactName: 'publish'
         targetPath: '$(Build.ArtifactStagingDirectory)/publish'
         
-        
-    - task: AzureCLI@2
-      displayName: 'Azure CLI - AKS Deployment'
+    - task: Docker@2
+      displayName: 'Build and push Docker image'
       inputs:
-        azureSubscription: 'Your Azure Subscription' # Choose or create a service connection to your Azure subscription
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-        az aks get-credentials --resource-group aks_terraform001 --name aksterraform001 --overwrite-existing
-        kubectl apply -f $(Build.ArtifactStagingDirectory)/publish/deployment.yaml    
+        containerRegistry: 'DockerHubConnection' # Add your Docker Hub connection here
+        repository: 'yourusername/mywebapp'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(Build.BuildId)'    
+    
+  
         
     - task: SonarCloudPrepare@1
       displayName: 'Prepare analysis on SonarCloud'
