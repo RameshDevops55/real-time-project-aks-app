@@ -12,7 +12,7 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("dotnet-demoapp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.5.0.0")]
+//[assembly: System.Reflection.AssemblyFileVersionAttribute("1.5.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.5.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("dotnet-demoapp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dotnet-demoapp")]
