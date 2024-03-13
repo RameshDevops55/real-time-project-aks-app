@@ -2,19 +2,20 @@
 
 #Streamlined Deployment of Web Applications on Azure Kubernetes Service (AKS)
 
-#Overview:
+## Overview:
 
 - This repository provides a streamlined approach for deploying web applications on Azure Kubernetes Service (AKS) using Continuous Integration (CI) and Continuous Deployment (CD) pipelines. The solution aims to automate the provisioning, deployment, scaling, monitoring, and security of web applications, enhancing agility, reliability, and scalability in cloud-native development workflows.
 
 
-#Architecture Diagram:
+## Architecture Diagram:
 
-<img width="749" alt="Screenshot 2024-03-12 at 13 04 56" src="https://github.com/RameshDevops55/real-time-project-aks-app/assets/142342787/1ec02294-cb4e-40b1-9deb-75028c292fa2">
-
-
+<img width="854" alt="Screenshot 2024-03-13 at 18 18 01" src="https://github.com/RameshDevops55/real-time-project-aks-app/assets/142342787/92889c78-f842-4d57-addc-b082b3cd5291">
 
 
-#Explanation of Architecture Diagram:
+
+
+
+## Explanation of Architecture Diagram:
 
 - The AKS (Azure Kubernetes Service) Cluster serves as the target environment for deploying the web application.
 - The CI Pipeline triggers the build process which includes tasks like dependency installation, code compilation, testing, and artifact generation (typically Docker images).
@@ -24,7 +25,7 @@
       This diagram illustrates the flow from building the application to its deployment onto the AKS Cluster through the CI/CD pipelines.
 
 
-#Key Components:
+## Key Components:
 
 1.Azure Kubernetes Service (AKS): 
     Managed Kubernetes service for orchestrating containerized applications.
@@ -49,7 +50,7 @@
    Network policies, pod security policies, and container image scanning for fortifying the AKS cluster and deployed applications against potential threats.
 
 
-#Pre-requisites to run Application.
+## Pre-requisites to run Application.
 
 - Create Service Principal in App Registration.
 - Add all the details to 'common' group variable in ADO
@@ -79,37 +80,37 @@ tf_state_subscription_id
 tf_state_tenant_id
 
 
-#Create a Project Repository on Git Hub and work on Repository to push your code into it. 
+## Create a Project Repository on Git Hub and work on Repository to push your code into it. 
 
 - Clone the Repository to Local Machine.
 - create branch and work on the branch to write the Scripts.
 - push your Branch to Github Repository and Raise Pull Request after accepting request merge your branch to Main Branch.
 
 
-#Setup Instructions
+## Setup Instructions
 
-1. Provision AKS Cluster using Terraform:
+### 1. Provision AKS Cluster using Terraform:
 
 - Navigate to the terraform directory.
 - configure terraform.tfvars file with Azure subscription details and AKS cluster properties.
 - Run terraform init, terraform plan, and terraform apply to provision the AKS cluster.
 - Verify successful creation of the cluster.
 
-2. Build Web Application - CI Pipeline:
+### 2. Build Web Application - CI Pipeline:
    
 - Set up a CI pipeline using Azure DevOps or GitHub Actions.
 - Configure pipeline stages for tasks such as dependency installation, code compilation, testing, and artifact generation.
 - Integrate code quality checks and static code analysis tools.
 - Ensure successful execution of the CI pipeline by validating generated artifacts (Docker images).
 
-3. Deploy CD Pipeline into AKS Cluster:
+### 3. Deploy CD Pipeline into AKS Cluster:
    
 - Configure a CD pipeline to trigger on successful completion of the CI pipeline and changes in deployable artifacts.
 - Define pipeline stages for tasks such as container image deployment, Kubernetes manifest generation, and cluster configuration updates.
 - Implement blue-green or canary deployment strategies.
 - Verify successful execution of the CD pipeline by validating the deployment of the web application onto the AKS cluster.
 
-4. Interconnected User Story (Integration of CI/CD pipelines with AKS):
+### 4. Interconnected User Story (Integration of CI/CD pipelines with AKS):
    
 - Configure pipeline tasks to authenticate with the AKS cluster using service principals or Kubernetes credentials.
 - Implement Kubernetes deployment manifests or Helm charts for defining the desired state of the application within the cluster.
@@ -117,6 +118,6 @@ tf_state_tenant_id
 - Verify seamless integration of CI/CD pipelines with the AKS cluster by validating successful deployments and scaling operations without manual intervention.
 
 
-#Conclusion
+## Conclusion
 
 - By following the setup instructions provided in this repository, teams can streamline the deployment of web applications on Azure Kubernetes Service, empowering them with a scalable, reliable, and efficient platform for cloud-native development workflows.
