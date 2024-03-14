@@ -1,0 +1,25 @@
+trigger:
+  branches:
+    include:
+      - main
+      - App-CI-Pipeline
+  paths:
+    exclude:
+      - './terraform/*'    
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- name: buildConfiguration
+  value: 'Release'
+
+- group: common
+
+stages:
+- stage: CI
+  jobs:
+  - job: Build
+    steps:
+    - template: pipeline-templates/dotnet-ci.yaml
+
